@@ -1,0 +1,124 @@
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3VzdG9tLmNzcyIsInNvdXJjZXMiOlsiY3VzdG9tLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9 */
+
+/*# sourceMappingURL=custom.css.map */
+/*
+ .sidebar-brand a .logo-name{
+ 	height: 40px !important;
+ }
+
+ .sidebar-brand a .header-logo{
+ 	height: 40px !important;
+    display:none;
+ }
+
+.sidebar-mini .main-sidebar .header-logo{
+    display:inherit;
+}
+*/
+.section {
+    position: initial !important;
+}
+
+.main-sidebar .sidebar-brand a {
+    text-decoration: none;
+    text-transform: none !important; 
+    letter-spacing: 0px !important; 
+    font-weight: 500 !important;
+}
+
+.bootstrap-timepicker-widget table td input{
+    width: 36px !important;
+}
+
+.buttons-colvis {
+    background-color: #2ab9d0 !important;
+    color: #fff !important;
+    border-radius: 5px !important;
+    border: 0 !important;
+    margin: 0px 5px 0px 5px;
+}
+
+.pagination-container {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.subtitle {
+    font-size: 17px !important;
+    color: #212529 !important;
+}
+
+
+.input-group-text, select.form-control:not([size]):not([multiple]), .form-control:not(.form-control-sm):not(.form-control-lg) {
+    font-size: 14px !important;
+    padding: 4px 8px !important;
+    height: 30px !important;
+    border-radius: 0px !important;
+}
+
+.form-group {
+    margin-bottom: 16px !important;
+}
+
+
+.select2-container .select2-selection--multiple, .select2-container .select2-selection--single{
+    min-height: 30px !important;
+    border-radius: 0px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__arrow {
+    min-height: 30px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    min-height: 30px !important;
+    line-height: 30px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+.selectgroup-button {
+    line-height: 30px !important;
+    height: 30px !important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: -0.1rem;
+    color: #808080 !important;
+}
+
+.main-content{
+    padding-top: 110px !important;
+}
+
+.card{
+    border-radius: 0px !important;
+}
+
+.table-logo{
+    width: 90px !important;
+    box-shadow: none !important;
+}
+
+.light-sidebar .main-sidebar .sidebar-menu li ul.dropdown-menu li.active>a {
+    color:#27ae60 !important;
+}
+
+body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu>li.active>a {
+    color: #27ae60 !important;
+}
+
+.loader {
+    text-align: center; /* Center text within its parent */
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered::after {
+    content: '\25BC';  /* Unicode for the down arrow */
+    font-size: 0.8em;   /* Adjust the font size to make the icon smaller */
+    position: absolute;
+    top: calc(50%); /* Adjust the top position to center the icon vertically */
+    right: 10px;
+    transform: translateY(-50%);
+}
