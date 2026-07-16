@@ -46,13 +46,13 @@
         <div class="sidebar-head"><a href="{{ route('classroom', $class) }}"><i class="icon-long-arrow-left"></i> Back to class</a><h2>{{ $class->class_title }}</h2><span>{{ $chapters->count() }} chapters</span></div>
         <ol class="chapter-nav">
             @foreach($chapters as $item)
-                <li><a href="{{ route('chapter', $item->slug) }}" class="{{ $item->id === $chapter->id ? 'active' : '' }}"><span class="nav-marker">{{ $loop->iteration }}</span><span>{{ $item->title }}</span></a></li>
+                <li><a href="{{ route('portal.chapter', $item->slug) }}" class="{{ $item->id === $chapter->id ? 'active' : '' }}"><span class="nav-marker">{{ $loop->iteration }}</span><span>{{ $item->title }}</span></a></li>
             @endforeach
         </ol>
     </aside>
     <section class="lesson-main">
         <select class="mobile-chapters form-control" aria-label="Select chapter" onchange="if(this.value) window.location.href=this.value">
-            @foreach($chapters as $item)<option value="{{ route('chapter', $item->slug) }}" {{ $item->id === $chapter->id ? 'selected' : '' }}>{{ $loop->iteration }}. {{ $item->title }}</option>@endforeach
+            @foreach($chapters as $item)<option value="{{ route('portal.chapter', $item->slug) }}" {{ $item->id === $chapter->id ? 'selected' : '' }}>{{ $loop->iteration }}. {{ $item->title }}</option>@endforeach
         </select>
         <header class="lesson-topbar"><h1>{{ $chapter->title }}</h1><a class="back-class" href="{{ route('classroom', $class) }}"><i class="icon-long-arrow-left"></i> All chapters</a></header>
         <div class="lesson-content">

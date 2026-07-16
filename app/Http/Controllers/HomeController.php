@@ -40,6 +40,53 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->boolean('older')) {
+            $title = 'Older Release Chapter';
+            $start = '1970-01-01';
+            $end = now()->startOfMonth()->subMonths(5)->subDay()->toDateString();
+        } elseif ($request->filled('month') && $request->filled('year') && $request->filled('week')) {
+            $year = (int) $request->input('year');
+            $month = (int) $request->input('month');
+
+            if ($request->input('week') === 'all') {
+                $start = Carbon::create($year, $month, 1)->startOfMonth()->toDateString();
+                $end = Carbon::create($year, $month, 1)->endOfMonth()->toDateString();
+                $title = 'Chapter in '.Carbon::create($year, $month, 1)->format('M Y');
+            } else {
+                $week = max(0, min(4, (int) $request->input('week')));
+                $weekNames = ['First Week', 'Second Week', 'Third Week', 'Fourth Week', 'Fifth Week'];
+                $dates = $this->getWeekDatesForMonth($year, $month);
+                $range = $dates[min($week, count($dates) - 1)];
+                $start = $range['start'];
+                $end = $range['end'];
+                $title = 'Chapter in '.Carbon::create($year, $month, 1)->format('M Y').' ('.$weekNames[$week].')';
+            }
+        } else {
+            $title = 'Latest Release Chapter';
+            $dates = $this->getCurrentWeekDates();
+            $start = $dates['start'];
+            $end = $dates['end'];
+        }
+
+        $ids = TrnChapterTeacher::where('teacher_id', Auth::id())
+            ->where('status', 1)
+            ->pluck('chapter_id');
+        $read_ids = TrnChapterTeacher::where('teacher_id', Auth::id())
+            ->where('status', 1)
+            ->where('seen_status', 1)
+            ->pluck('chapter_id')
+            ->all();
+        $chapters = MstChapter::where('status', 1)
+            ->whereIn('id', $ids)
+            ->whereBetween('release_date', [$start, $end])
+            ->orderBy('release_date')
+            ->get();
+
+        return view('home', compact('chapters', 'title', 'read_ids'));
+    }
+
+    public function portal()
+    {
         $classes = MstClass::query()
             ->where('mst_classes.status', 1)
             ->whereHas('teachers', function ($query) {
@@ -59,7 +106,7 @@ class HomeController extends Controller
             $class->setAttribute('search_terms', $chapters->pluck('title')->prepend($class->class_title)->implode(' '));
         });
 
-        return view('home', compact('classes'));
+        return view('portal.home', compact('classes'));
     }
 
     public function classroom(MstClass $class)
@@ -130,7 +177,7 @@ class HomeController extends Controller
         return view('chapters', compact('chapters', 'readIds', 'title'));
     }
 
-    public function chapter($slug) {
+    public function chapter($slug, $view = 'legacy.chapter') {
         
         $chapter = MstChapter::where('slug',$slug)->where('status',1)->first();
 
@@ -208,11 +255,16 @@ class HomeController extends Controller
                 ->filter(fn ($item) => $this->chapterBelongsToClass($item, $class->id))
                 ->values();
 
-            return view('chapter', compact('chapter','attachments', 'videos', 'class', 'chapters'));
+            return view($view, compact('chapter','attachments', 'videos', 'class', 'chapters'));
         }else{
             return redirect('home');
         }
         
+    }
+
+    public function portalChapter($slug)
+    {
+        return $this->chapter($slug, 'chapter');
     }
 
     public function downloadAttachment($slug,$file_name){

@@ -48,30 +48,34 @@
                         <a href="{{ route('home') }}">Home</a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('portal.home') }}">New Dashboard</a>
+                    </li>
+
                     @php
                     $mobileChapterMonths = collect(range(0, 5))->map(fn ($offset) => now()->startOfMonth()->subMonths($offset));
                     $mobileChapterWeekNames = ['First Week', 'Second Week', 'Third Week', 'Fourth Week', 'Fifth Week'];
                     @endphp
                     <li>
-                        <a href="{{ route('chapters.index') }}">Chapters</a>
+                        <a href="{{ route('home') }}">Chapters</a>
                         <ul>
-                            <li><a href="{{ route('chapters.index') }}">Latest Release Chapter</a></li>
+                            <li><a href="{{ route('home') }}">Latest Release Chapter</a></li>
                             @foreach($mobileChapterMonths as $month)
                             <li><a
-                                    href="{{ route('chapters.index', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>'all']) }}">{{ $month->format('F Y') }}</a>
+                                    href="{{ route('home', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>'all']) }}">{{ $month->format('F Y') }}</a>
                                 <ul>
                                     @foreach($mobileChapterWeekNames as $weekIndex => $weekName)
                                     <li><a
-                                            href="{{ route('chapters.index', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>$weekIndex]) }}">{{ $weekName }}</a>
+                                            href="{{ route('home', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>$weekIndex]) }}">{{ $weekName }}</a>
                                     </li>
                                     @endforeach
                                     <li><a
-                                            href="{{ route('chapters.index', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>'all']) }}">All
+                                            href="{{ route('home', ['month'=>$month->format('m'),'year'=>$month->format('Y'),'week'=>'all']) }}">All
                                             Week</a></li>
                                 </ul>
                             </li>
                             @endforeach
-                            <li><a href="{{ route('chapters.index', ['older'=>1]) }}">Older Release Chapter</a></li>
+                            <li><a href="{{ route('home', ['older'=>1]) }}">Older Release Chapter</a></li>
                         </ul>
                     </li>
 

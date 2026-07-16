@@ -30,6 +30,8 @@ Route::get('send-chapter-allocatin-emails', [ ViewController::class,'sendChapter
 Route::group(['middleware' => ['auth','role:3']], function() {
     Route::controller(HomeController::class)->group(function() {
         Route::get('/home', 'index')->name('home');
+        Route::get('/new-dashboard', 'portal')->name('portal.home');
+        Route::get('/new-dashboard/chapter/{slug}', 'portalChapter')->name('portal.chapter');
         Route::get('/my-chapters', 'chapters')->name('chapters.index');
         Route::get('/classroom/{class}', 'classroom')->name('classroom');
         Route::get('/chapter/{slug}', 'chapter')->name('chapter');

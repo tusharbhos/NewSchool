@@ -146,12 +146,12 @@
                 <div class="lesson-row">
                     <div class="lesson-state {{ in_array($chapter->id, $readIds) ? 'done' : '' }}"><i
                             class="{{ in_array($chapter->id, $readIds) ? 'icon-check' : 'icon-play' }}"></i></div>
-                    <div><a class="lesson-title" href="{{ route('chapter', $chapter->slug) }}">{{ $chapter->title }}</a>
+                    <div><a class="lesson-title" href="{{ route('portal.chapter', $chapter->slug) }}">{{ $chapter->title }}</a>
                         <div class="lesson-meta">Released
                             {{ \Carbon\Carbon::parse($chapter->release_date)->format('d M Y') }}</div>
                     </div>
                     <a class="start-btn"
-                        href="{{ route('chapter', $chapter->slug) }}">{{ in_array($chapter->id, $readIds) ? 'Continue' : 'Start lesson' }}</a>
+                        href="{{ route('portal.chapter', $chapter->slug) }}">{{ in_array($chapter->id, $readIds) ? 'Continue' : 'Start lesson' }}</a>
                 </div>
                 @empty
                 <div class="empty-lessons">
