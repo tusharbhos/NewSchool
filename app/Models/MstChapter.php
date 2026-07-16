@@ -9,7 +9,7 @@ class MstChapter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'release_date', 'chapter_image11', 'description11', 'created_by', 'status', 'slug', 'asset_path', 'class_data', 'visibility'];
+    protected $fillable = ['title', 'release_date', 'chapter_image', 'description', 'created_by', 'status', 'slug', 'asset_path', 'class_data', 'visibility'];
 
     public function getClassDataAttribute($value): ?string
     {

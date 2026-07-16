@@ -56,6 +56,7 @@ class HomeController extends Controller
             );
             $class->setAttribute('chapter_count', $chapters->count());
             $class->setAttribute('cover_chapter', $chapters->first());
+            $class->setAttribute('search_terms', $chapters->pluck('title')->prepend($class->class_title)->implode(' '));
         });
 
         return view('home', compact('classes'));
